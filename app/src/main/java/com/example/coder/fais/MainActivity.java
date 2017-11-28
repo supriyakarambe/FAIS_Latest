@@ -3,11 +3,8 @@ package com.example.coder.fais;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import com.example.coder.fais.models.CategoryAdapter;
 import com.example.coder.fais.utils.Constants;
@@ -23,11 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-   /* ListView catergoryListView;
-    CustomizedListAdapter listAdapter;
-    ArrayList<Categories> categoriesList = new ArrayList<Categories>();
-    ChildEventListener mChildEventListener;
-    DatabaseReference myRef;*/
+
    private CategoryAdapter categoryAdapter;
     private ExpandableListView expLV;
     private ChildEventListener mChildEventListener;
@@ -42,61 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getList();
-        /*catergoryListView = (ListView) findViewById(R.id.lv_category_list);
-        listAdapter = new CustomizedListAdapter(this, categoriesList);
-        catergoryListView.setAdapter(listAdapter);
-        catergoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Intent intent = new Intent(MainActivity.this, SubCategoryActivity.class);
-                int i=categoriesList.get(position).getCategoryid();
-                intent.putExtra("CategoryId",i);
-                startActivity(intent);
-            }
-        });
-        myRef = FireBase.getInstance().getFireBaseReference(Constants.FIRBASE_Category_DATA);
-        mChildEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Categories cat = new Categories();
-                for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
-
-                    if(messageSnapshot.getKey().equals("CategoryId"))
-                        cat.setCategoryid(Integer.valueOf(messageSnapshot.getValue().toString()));
-                    else
-                        cat.setCategoryName(messageSnapshot.getValue().toString());
-
-                }
-                categoriesList.add(cat);
-                listAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-
-
-        };
-
-        myRef.addChildEventListener(mChildEventListener);
-*/
     }
 
 
@@ -107,22 +46,11 @@ public class MainActivity extends AppCompatActivity {
         mapChild = new HashMap<>();
 
 
-
-        expLV.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            int previousItem = -1;
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                if (groupPosition != previousItem)
-                    expLV.collapseGroup(previousItem);
-                previousItem = groupPosition;
-            }
-        });
-
         categoryAdapter = new CategoryAdapter(listCategories,mapChild,MainActivity.this);
         expLV.setAdapter(categoryAdapter);
 
 
+        //Firebase database reference
         myRef = FireBase.getInstance().getFireBaseReference(Constants.FIRBASE_Category_DATA);
         mChildEventListener = new ChildEventListener() {
             @Override
@@ -198,6 +126,18 @@ public class MainActivity extends AppCompatActivity {
 
         myRef.addChildEventListener(mChildEventListener);
 
+      expLV.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            int previousItem = -1;
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if (groupPosition != previousItem)
+                    expLV.collapseGroup(previousItem);
+                previousItem = groupPosition;
+            }
+        });
+
+
         expLV.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
             public boolean onChildClick(ExpandableListView parent, View v,
@@ -205,14 +145,9 @@ public class MainActivity extends AppCompatActivity {
                 String selected = (String) categoryAdapter.getChild(
                         groupPosition, childPosition);
 
-                Log.d("selected..........",selected);
-
                 Intent intent = new Intent(MainActivity.this, FaisTabActivity.class);
                 intent.putExtra("SubCategoryId",selected);
                 startActivity(intent);
-               /* Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG)
-                        .show();*/
-
                 return true;
             }
         });
