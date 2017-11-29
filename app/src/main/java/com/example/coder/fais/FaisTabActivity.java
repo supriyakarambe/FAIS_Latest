@@ -83,27 +83,27 @@ public class FaisTabActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_fais_tab, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_fais_tab, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     /**
      * A placeholder fragment containing a simple view.
@@ -160,9 +160,9 @@ public class FaisTabActivity extends AppCompatActivity {
                 case 1:
                     EmergencyContactFragment tab2=new EmergencyContactFragment();
                     return  tab2;
-                case 2:
-                    VideosFragment tab3=new VideosFragment();
-                    return tab3;
+//                case 2:
+//                    VideosFragment tab3=new VideosFragment();
+//                    return tab3;
             }
             return null;
         }
@@ -170,7 +170,7 @@ public class FaisTabActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -180,8 +180,8 @@ public class FaisTabActivity extends AppCompatActivity {
                     return Constants.FIRST_AID_INFO;
                 case 1:
                     return  Constants.EMERGENCY_CONTACT;
-                case 2:
-                    return Constants.VIDEOS;
+//                case 2:
+//                    return Constants.VIDEOS;
             }
             return null;
         }

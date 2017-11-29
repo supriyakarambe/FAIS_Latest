@@ -13,4 +13,27 @@
     <string name="tab_text_2">Emergency Contact</string>
     <string name="tab_text_3">Videos</string>
     <string name="title_activity_fais_tab">FaisTabActivity</string>
+
+    <string-array name="emergency">
+        <item>Argentina : 107</item>
+        <item>Australia : 000</item>
+        <item>Brasil : 192</item>
+        <item>Canada : : 911</item>
+        <item>China : 120</item>
+        <item>Hongkong : 999</item>
+        <item>India : 112</item>
+        <item>Israel : 101</item>
+        <item>Italy : 118</item>
+        <item>Japan : 119</item>
+        <item>Mexico : 066</item>
+        <item>New Zealand : 111</item>
+        <item>Norway : 113</item>
+        <item>Saudi Arabia : 997</item>
+        <item>Switzerland : 144</item>
+        <item>Turkey : 112</item>
+        <item>European Union : 112</item>
+        <item>UK : 999</item>
+        <item>USA : 911</item>
+        <item>temp :temp</item>
+    </string-array>
 </resources>

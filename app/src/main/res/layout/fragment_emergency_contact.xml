@@ -5,9 +5,19 @@
     tools:context="com.example.coder.fais.EmergencyContactFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:orientation="vertical">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:id="@+id/emergency_img"
+        android:src="@mipmap/emergency"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list_emergency"
+        android:entries="@string/hello_blank_fragment" />
+    </LinearLayout>
 </FrameLayout>
