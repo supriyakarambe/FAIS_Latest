@@ -3,7 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="symptoms">Symptoms</string>
+    <string name="symptoms">Symptoms/Causes</string>
     <string name="treatment">Treatment</string>
     <string name="title_activity_first_aid_info_details">FirstAidInfoDetails</string>
     <string name="action_settings">Settings</string>

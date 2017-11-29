@@ -25,11 +25,11 @@ public class CategoryAdapter extends BaseExpandableListAdapter
         {
 
     private ArrayList<String> listCategories;
-    private Map<String, ArrayList<String>> mapChild;
+    private Map<String, ArrayList<SubCategories>> mapChild;
     private Context context;
     Integer img=R.drawable.cpr;
 
-    public CategoryAdapter(ArrayList<String> listCategories, Map<String, ArrayList<String>> mapChild, Context context) {
+    public CategoryAdapter(ArrayList<String> listCategories, Map<String, ArrayList<SubCategories>> mapChild, Context context) {
         this.listCategories = listCategories;
         this.mapChild = mapChild;
         this.context = context;
@@ -54,7 +54,7 @@ public class CategoryAdapter extends BaseExpandableListAdapter
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosition) {
+    public SubCategories getChild(int groupPosition, int childPosition) {
         return mapChild.get(listCategories.get(groupPosition)).get(childPosition);
     }
 
@@ -89,7 +89,7 @@ public class CategoryAdapter extends BaseExpandableListAdapter
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
-        String item = (String)getChild(groupPosition,childPosition);
+        String item = (String)(getChild(groupPosition,childPosition).getSubCategoryName());
         convertView = LayoutInflater.from(context).inflate(R.layout.subcategory_group,null);
         TextView tvGroup = (TextView) convertView.findViewById(R.id.subcat);
         tvGroup.setText(item);

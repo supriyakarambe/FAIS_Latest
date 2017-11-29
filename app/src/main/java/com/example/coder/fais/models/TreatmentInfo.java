@@ -1,5 +1,7 @@
 package com.example.coder.fais.models;
 
+import java.util.ArrayList;
+
 /**
  * Created by Supriya on 11/19/17.
  */
@@ -7,9 +9,9 @@ package com.example.coder.fais.models;
 public class TreatmentInfo {
     int infoId;
     int subCategoryId;
-    String symptoms;
-    String steps;
-    String FAQs;
+    ArrayList<String> symptoms;
+    ArrayList<String> steps;
+    ArrayList<String> FAQs;
 
 
     public int getInfoId() {
@@ -28,27 +30,27 @@ public class TreatmentInfo {
         this.subCategoryId = subCategoryId;
     }
 
-    public String getSymptoms() {
+    public ArrayList<String> getSymptoms() {
         return symptoms;
     }
 
-    public void setSymptoms(String symptoms) {
+    public void setSymptoms(ArrayList<String> symptoms) {
         this.symptoms = symptoms;
     }
 
-    public String getSteps() {
+    public ArrayList<String> getSteps() {
         return steps;
     }
 
-    public void setSteps(String steps) {
+    public void setSteps(ArrayList<String> steps) {
         this.steps = steps;
     }
 
-    public String getFAQs() {
+    public ArrayList<String> getFAQs() {
         return FAQs;
     }
 
-    public void setFAQs(String FAQs) {
+    public void setFAQs(ArrayList<String> FAQs) {
         this.FAQs = FAQs;
     }
 }

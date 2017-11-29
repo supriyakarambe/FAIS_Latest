@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/symptoms"
-        android:id="@+id/symptoms"/>
+        android:id="@+id/symptoms"
+        android:textColor="@color/tw__composer_red"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -22,7 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/treatment"
-        android:id="@+id/treatment"/>
+        android:id="@+id/treatment"
+        android:textColor="@color/tw__composer_red"/>
 
     <TextView
         android:layout_width="match_parent"

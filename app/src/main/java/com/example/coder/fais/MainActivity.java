@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import com.example.coder.fais.models.CategoryAdapter;
+import com.example.coder.fais.models.SubCategories;
 import com.example.coder.fais.utils.Constants;
 import com.example.coder.fais.utils.FireBase;
 import com.google.firebase.database.ChildEventListener;
@@ -24,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
    private CategoryAdapter categoryAdapter;
     private ExpandableListView expLV;
     private ChildEventListener mChildEventListener;
-    private Map<String, ArrayList<String>> mapChild;
+    private Map<String, ArrayList<SubCategories>> mapChild;
     private DatabaseReference myRef;
     private DatabaseReference subRef;
     private ArrayList<String> listCategories = new ArrayList<String>();
-    private ArrayList<Integer> subCategory = new ArrayList<Integer>();
+    private ArrayList<SubCategories> subCategory = new ArrayList<SubCategories>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +68,13 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        SubCategories sub=new SubCategories(Integer.valueOf( dataSnapshot.child("SubCategoryId").getValue().toString()),dataSnapshot.child("Name").getValue().toString());
                         if(mapChild.containsKey(categoryName)){
-                            mapChild.get(categoryName).add(dataSnapshot.child("Name").getValue().toString());
+                            mapChild.get(categoryName).add(sub);
                         }else{
-                            ArrayList<String> subcategoryList = new ArrayList<>();
-                            subcategoryList.add(dataSnapshot.child("Name").getValue().toString());
-                            subCategory.add(Integer.valueOf( dataSnapshot.child("SubCategoryId").getValue().toString()));
+                            ArrayList<SubCategories> subcategoryList = new ArrayList<>();
+                            subcategoryList.add(sub);
+                            subCategory.add(new SubCategories(Integer.valueOf( dataSnapshot.child("SubCategoryId").getValue().toString()),dataSnapshot.child("Name").getValue().toString()));
                             mapChild.put(categoryName, subcategoryList);
                         }
                     }
@@ -138,15 +141,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
         expLV.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                String selected = (String) categoryAdapter.getChild(
+                SubCategories selected = categoryAdapter.getChild(
                         groupPosition, childPosition);
 
+                //Toast.makeText(getApplicationContext(),groupPosition +":"+ childPosition,Toast.LENGTH_LONG);
                 Intent intent = new Intent(MainActivity.this, FaisTabActivity.class);
-                intent.putExtra("SubCategoryId",selected);
+                intent.putExtra("SubCategoryId",selected.getSubCategoryId());
                 startActivity(intent);
                 return true;
             }

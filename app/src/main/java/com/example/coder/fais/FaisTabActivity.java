@@ -21,7 +21,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.coder.fais.models.Categories;
+import com.example.coder.fais.models.SubCategories;
 import com.example.coder.fais.utils.Constants;
+import com.example.coder.fais.utils.FireBase;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class FaisTabActivity extends AppCompatActivity {
 
@@ -39,6 +50,9 @@ public class FaisTabActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    ChildEventListener mChildEventListener;
+    DatabaseReference myRef;
+    Query query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +60,6 @@ public class FaisTabActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fais_tab);
 
         id=getIntent().getIntExtra("SubCategoryId",0);
-        Toast.makeText(getApplicationContext(),"SubId"+id,Toast.LENGTH_LONG);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,6 +75,8 @@ public class FaisTabActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+
 
 
 

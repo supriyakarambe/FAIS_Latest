@@ -6,12 +6,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.coder.fais.models.Categories;
 import com.example.coder.fais.models.TreatmentInfo;
 import com.example.coder.fais.utils.Constants;
 import com.example.coder.fais.utils.FireBase;
@@ -20,6 +22,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
+
+import org.w3c.dom.Text;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 @SuppressLint("ValidFragment")
@@ -34,62 +41,83 @@ public class TreatmentInfoFragment extends Fragment {
     TreatmentInfo info;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
-        Toast.makeText(getActivity().getApplicationContext(), "SubCategoryId :"+subId, Toast.LENGTH_SHORT).show();
-
-        myRef = FireBase.getInstance().getFireBaseReference(Constants.FIRBASE_SubCategory_DATA);
-        query=myRef.orderByChild("CategoryId").equalTo(subId);
-//        mChildEventListener = new ChildEventListener() {
-//
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                 info=new TreatmentInfo();
-//                for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
-//
-//                    if(messageSnapshot.getKey().equals("Symptoms"))
-//                        info.setSymptoms(messageSnapshot.getValue().toString());
-//                    else if(messageSnapshot.getKey().equals("Steps"))
-//                        info.setSteps(messageSnapshot.getValue().toString());
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        };
-//
-//
-//        symptoms.setText(info.getSymptoms());
-//        steps.setText(info.getSteps());
-        return inflater.inflate(R.layout.fragment_treatment_info, container, false);
+        LoadData();
+        View view = inflater.inflate(R.layout.fragment_treatment_info, container, false);
+        symptoms=(TextView) view.findViewById(R.id.symptomsDetails);
+        steps=(TextView) view.findViewById(R.id.treatmentDetails);
+        return view;
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
 
     @SuppressLint("ValidFragment")
     public TreatmentInfoFragment(int id) {
         this.subId=id;
+
+
+    }
+    public TreatmentInfoFragment() {
     }
 
 
-    public TreatmentInfoFragment() {
+    private void LoadData()
+    {
+        myRef = FireBase.getInstance().getFireBaseReference(Constants.FIRBASE_Treatment_DATA);
+        query=myRef.orderByChild("SubCategoryId").equalTo(subId);
+        mChildEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                info=new TreatmentInfo();
+                for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
+
+                    if(messageSnapshot.getKey().equals("Steps"))
+                        info.setSteps((ArrayList<String>)messageSnapshot.getValue());
+                    else if (messageSnapshot.getKey().equals("Symptoms"))
+                        info.setSymptoms((ArrayList<String>)messageSnapshot.getValue());
+                }
+                String stepTxt="";
+                for (String step:info.getSteps()) {
+                    stepTxt+=step+"<br>";
+                }
+                String symptomTxt="";
+                for (String symptom:info.getSymptoms()) {
+                    symptomTxt+=symptom+"<br>";
+                }
+
+                symptoms.setText(Html.fromHtml(symptomTxt));
+                steps.setText(Html.fromHtml(stepTxt));
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+
+        };
+
+        query.addChildEventListener(mChildEventListener);
+
     }
 }

@@ -9,6 +9,11 @@ public class SubCategories {
     int subCategoryId;
     int categoryId;
     String subCategoryName;
+    public SubCategories(int id,String name)
+    {
+        this.subCategoryId=id;
+        this.subCategoryName=name;
+    }
 
 
     public int getSubCategoryId() {
@@ -34,4 +39,6 @@ public class SubCategories {
     public void setSubCategoryName(String subCategoryName) {
         this.subCategoryName = subCategoryName;
     }
+
+
 }
