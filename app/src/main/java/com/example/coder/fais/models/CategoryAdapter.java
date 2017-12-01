@@ -27,7 +27,9 @@ public class CategoryAdapter extends BaseExpandableListAdapter
     private ArrayList<String> listCategories;
     private Map<String, ArrayList<SubCategories>> mapChild;
     private Context context;
-    Integer img=R.drawable.cpr;
+    int i=0;
+    Integer[] img={R.drawable.category_1,R.drawable.category_2,R.drawable.category_3,R.drawable.category_4,R.drawable.category_5,R.drawable.category_6,R.drawable.category_7,R.drawable.category_8,R.drawable.category_9};
+    //Integer img=R.drawable.cpr;
 
     public CategoryAdapter(ArrayList<String> listCategories, Map<String, ArrayList<SubCategories>> mapChild, Context context) {
         this.listCategories = listCategories;
@@ -79,7 +81,7 @@ public class CategoryAdapter extends BaseExpandableListAdapter
         String totalCategories=(String)getGroup(groupPosition);
         convertView = LayoutInflater.from(context).inflate(R.layout.category_group,null);
         ImageView image= (ImageView) convertView.findViewById(R.id.catimage);
-        image.setImageResource(R.drawable.cpr);
+        image.setImageResource(img[groupPosition]);
         TextView tvGroup = (TextView) convertView.findViewById(R.id.catgroup);
 
         tvGroup.setText(totalCategories);
