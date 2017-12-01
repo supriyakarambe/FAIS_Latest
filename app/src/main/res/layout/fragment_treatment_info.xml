@@ -9,14 +9,20 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingLeft="10dp"
         android:text="@string/symptoms"
+        android:textSize="18sp"
         android:id="@+id/symptoms"
         android:textColor="@color/tw__composer_red"/>
 
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/symptomsDetails"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:paddingLeft="10dp"
+        android:textSize="18sp"
         />
 
     <TextView
@@ -24,11 +30,16 @@
         android:layout_height="wrap_content"
         android:text="@string/treatment"
         android:id="@+id/treatment"
+        android:textSize="18sp"
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp"
         android:textColor="@color/tw__composer_red"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingLeft="10dp"
         android:id="@+id/treatmentDetails"/>
 
 </LinearLayout>
