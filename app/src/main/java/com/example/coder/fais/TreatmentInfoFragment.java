@@ -2,6 +2,7 @@ package com.example.coder.fais;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +47,9 @@ public class TreatmentInfoFragment extends Fragment {
 
         LoadData();
         View view = inflater.inflate(R.layout.fragment_treatment_info, container, false);
+        //ImageView image= (ImageView) view.findViewById(R.id.bulletimage);
+        //image.setImageResource(R.drawable.bullet);
+
         symptoms=(TextView) view.findViewById(R.id.symptomsDetails);
         steps=(TextView) view.findViewById(R.id.treatmentDetails);
         return view;
@@ -69,6 +74,10 @@ public class TreatmentInfoFragment extends Fragment {
 
     private void LoadData()
     {
+
+
+        //img.setBounds( 0, 0, 60, 60 );
+
         myRef = FireBase.getInstance().getFireBaseReference(Constants.FIRBASE_Treatment_DATA);
         query=myRef.orderByChild("SubCategoryId").equalTo(subId);
         mChildEventListener = new ChildEventListener() {
@@ -84,13 +93,15 @@ public class TreatmentInfoFragment extends Fragment {
                 }
                 String stepTxt="";
                 for (String step:info.getSteps()) {
-                    stepTxt+=step+"<br>";
+                    stepTxt+="<font color='#d32f2f'>"+"\u25CF"+"</font>"+step+"</b><br>";
                 }
                 String symptomTxt="";
                 for (String symptom:info.getSymptoms()) {
-                    symptomTxt+=symptom+"<br>";
+                    symptomTxt+="<font color='#d32f2f'>"+"\u25CF"+"</font>"+symptom+"<br>";
                 }
 
+               // Drawable img = getContext().getResources().getDrawable( R.drawable.bullet );
+                //img.setBounds( 0, 0, 60, 60 );
                 symptoms.setText(Html.fromHtml(symptomTxt));
                 steps.setText(Html.fromHtml(stepTxt));
             }
