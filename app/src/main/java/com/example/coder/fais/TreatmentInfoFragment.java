@@ -93,11 +93,11 @@ public class TreatmentInfoFragment extends Fragment {
                 }
                 String stepTxt="";
                 for (String step:info.getSteps()) {
-                    stepTxt+="<font color='#d32f2f'>"+"\u25CF"+"</font>"+step+"</b><br>";
+                    stepTxt+="<font color='#d32f2f'>"+"\u25CF"+"</font>&nbsp;"+step+"<br>";
                 }
                 String symptomTxt="";
                 for (String symptom:info.getSymptoms()) {
-                    symptomTxt+="<font color='#d32f2f'>"+"\u25CF"+"</font>"+symptom+"<br>";
+                    symptomTxt+="<font color='#d32f2f'>"+"\u25CF"+"</font>&nbsp;"+symptom+"<br>";
                 }
 
                // Drawable img = getContext().getResources().getDrawable( R.drawable.bullet );
