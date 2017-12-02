@@ -2,7 +2,6 @@ package com.example.coder.fais;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -41,17 +40,17 @@ public class TreatmentInfoFragment extends Fragment {
     TextView symptoms;
     TextView steps;
     TreatmentInfo info;
-
+    ImageView img;
+    int res;
     @Override
       public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        LoadData();
-        View view = inflater.inflate(R.layout.fragment_treatment_info, container, false);
-        //ImageView image= (ImageView) view.findViewById(R.id.bulletimage);
-        //image.setImageResource(R.drawable.bullet);
 
+        View view = inflater.inflate(R.layout.fragment_treatment_info, container, false);
+        img=(ImageView)view.findViewById(R.id.img_subcat);
         symptoms=(TextView) view.findViewById(R.id.symptomsDetails);
         steps=(TextView) view.findViewById(R.id.treatmentDetails);
+        LoadData();
         return view;
 
     }
@@ -74,12 +73,21 @@ public class TreatmentInfoFragment extends Fragment {
 
     private void LoadData()
     {
-
-
-        //img.setBounds( 0, 0, 60, 60 );
-
         myRef = FireBase.getInstance().getFireBaseReference(Constants.FIRBASE_Treatment_DATA);
         query=myRef.orderByChild("SubCategoryId").equalTo(subId);
+
+
+//        final Toast toast = Toast.makeText(getContext(), "subcategory_"+subId, Toast.LENGTH_LONG);
+//        toast.show();
+
+        String imagename = "subcategory_"+subId;
+        res = getResources().getIdentifier(imagename, "drawable", this.getActivity().getPackageName());
+        img.setImageResource(res);
+        //Toast.makeText(getContext(),res,Toast.LENGTH_LONG).show();
+        //imageview= (ImageView)findViewById(R.id.imageView);
+
+
+
         mChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -93,17 +101,17 @@ public class TreatmentInfoFragment extends Fragment {
                 }
                 String stepTxt="";
                 for (String step:info.getSteps()) {
-                    stepTxt+="<font color='#d32f2f'>"+"\u25CF"+"</font>&nbsp;"+step+"<br>";
+                    stepTxt+="<font color='#d32f2f'>"+"\u25CF"+"</font>"+step+"</b><br>";
                 }
                 String symptomTxt="";
                 for (String symptom:info.getSymptoms()) {
-                    symptomTxt+="<font color='#d32f2f'>"+"\u25CF"+"</font>&nbsp;"+symptom+"<br>";
+                    symptomTxt+="<font color='#d32f2f'>"+"\u25CF"+"</font>"+symptom+"<br>";
                 }
 
-               // Drawable img = getContext().getResources().getDrawable( R.drawable.bullet );
-                //img.setBounds( 0, 0, 60, 60 );
                 symptoms.setText(Html.fromHtml(symptomTxt));
                 steps.setText(Html.fromHtml(stepTxt));
+               // Toast.makeText(getContext(),res,Toast.LENGTH_LONG).show();
+
             }
 
             @Override
