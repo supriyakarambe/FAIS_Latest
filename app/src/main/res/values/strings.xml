@@ -13,6 +13,8 @@
     <string name="tab_text_2">Emergency Contact</string>
     <string name="tab_text_3">Videos</string>
     <string name="title_activity_fais_tab">FaisTabActivity</string>
+    <string name="button_text_search">Search</string>
+    <string name="search_hint">Search Treatment</string>
 
     <string-array name="emergency">
         <item>Argentina : 107</item>

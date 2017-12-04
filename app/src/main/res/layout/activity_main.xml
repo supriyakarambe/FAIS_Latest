@@ -8,13 +8,10 @@
     android:orientation="vertical"
     tools:context="com.example.coder.fais.MainActivity">
 
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="170dp"
         app:srcCompat="@drawable/firstaid" />
-
-
     <ExpandableListView
         android:id="@+id/expLV"
         android:layout_width="match_parent"

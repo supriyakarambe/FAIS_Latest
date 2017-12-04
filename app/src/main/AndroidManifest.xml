@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +25,9 @@
         <activity
             android:name=".FaisTabActivity"
             android:label="@string/title_activity_fais_tab"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SearchTreatment" />
+        <activity android:name=".SearchResultActivity"></activity>
     </application>
 
 </manifest>
