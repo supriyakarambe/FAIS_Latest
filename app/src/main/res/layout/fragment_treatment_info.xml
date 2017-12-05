@@ -8,9 +8,9 @@
     <!-- TODO: Update blank fragment layout -->
     <ImageView
         android:id="@+id/img_subcat"
-        android:layout_width="410dp"
+        android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:scaleType="fitXY"/>
+        android:scaleType="fitXY" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
